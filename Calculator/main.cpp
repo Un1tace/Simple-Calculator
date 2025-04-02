@@ -7,34 +7,45 @@ constexpr char operators[4] = {'*', '/', '+', '-'};
 
 // Simple algorithm to check if an item is in a list.
 bool listContains(auto toFind, auto list[]) {
+
     bool found = false;
+
     for (int i = 0; i < strlen(list); i++) {
         if (toFind == list[i]) {
             found = true;
         }
     }
+
     return found;
 }
 
 // Find all the indexes of the operator in the operators variable in the string
 vector<int> findIndexesOfOperatorsInString(const string& theString) {
+
     vector<int> indexes;
+
     for (int i = 0; i < strlen(theString.c_str()); i++) {
         if (listContains(theString[i], operators)) indexes.push_back(i);
     }
+
     return indexes;
 }
 
+//Counts the number of a certain character in a string
 int countOfOperatorsInString(char operatorChar, const string& theString) {
-int amount = 0;
+    int amount = 0;
+
     for (int i = 0; i < strlen(theString.c_str()); i++) {
         if (operatorChar == theString[i]) amount++;
     }
+
     return amount;
 }
 
+//Gets the string between two indexes... returns the string at startIndex + 1 and endIndex - 1
 string getStringBetweenIndexes(const string& input, const int startIndex, const int endIndex) {
     string output;
+
     for (int i = startIndex + 1; i < endIndex; i++) {
         output += input[i];
     }
@@ -42,13 +53,18 @@ string getStringBetweenIndexes(const string& input, const int startIndex, const 
     return output;
 }
 
+//Calculate equation function calculates the equation of a string with the 4 basic functions such as (*,/,+,-) <- In this order
+//Returns the answer as a string just because :)
 string calculateEquation(string input) {
     vector<int> indexes = findIndexesOfOperatorsInString(input);
 
     // Splitting the numbers and what operators to use as well as using them i n calculations
     for (int o = 0; o < strlen(operators); o++) {
+
         int i = 0;
+
         while (countOfOperatorsInString(operators[o], input) != 0) {
+
             if (input[indexes[i]] == operators[o]) {
                 // Uses functions to get the string between two indexes: getStringBetweenIndexes()
                 string numString1 = getStringBetweenIndexes(input, i-1 < 0 ? -1 : indexes[i - 1], indexes[i]);
@@ -80,30 +96,36 @@ string calculateEquation(string input) {
 
 
             }
+
             else {
                 i++;
             }
         }
     }
+
     return input;
 }
 
+//Removes spaces within an input string, easier to parse otherwise it gives me errors
 string removeSpaces(string inputString) {
     int index = 0;
+
     while (index < inputString.length() + 1) {
         if (inputString[index] == ' ') {
             inputString.erase(index, 1);
         }
         else index++;
     }
+
     return inputString;
 }
 
+//Main
 int main() {
     // Get input
 
     cout << "(*,/,+,-)" << endl <<"Enter the calculation you want to perform: " << endl;
-    //cin >> input;
+
     string input;
     // Use this function to get the entire line of the input... :3
     getline(cin, input);
@@ -125,18 +147,6 @@ int main() {
 
     input = removeSpaces(input);
 
-                indexes = findIndexesOfOperatorsInString(input);
-                i=0;
-
-
-            }
-            else {
-                i++;
-            }
-        }
-        outOfWhile:
-    }
-*/
     input = calculateEquation(input);
 
     //Output answer
