@@ -139,7 +139,8 @@ int main() {
 */
     input = calculateEquation(input);
 
-    cout << input << endl;
+    //Output answer
+    cout << "Answer: " << input << endl;
 
     return 0;
 }
