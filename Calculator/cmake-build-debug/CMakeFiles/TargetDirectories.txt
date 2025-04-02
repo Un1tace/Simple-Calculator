@@ -1,0 +1,3 @@
+/Users/kaiafful/Documents/Cpp Projects/Calculator/cmake-build-debug/CMakeFiles/Calculator.dir
+/Users/kaiafful/Documents/Cpp Projects/Calculator/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/kaiafful/Documents/Cpp Projects/Calculator/cmake-build-debug/CMakeFiles/rebuild_cache.dir
