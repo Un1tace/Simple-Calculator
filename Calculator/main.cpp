@@ -84,7 +84,6 @@ string calculateEquation(string input) {
                 i++;
             }
         }
-        outOfWhile:
     }
     return input;
 }
