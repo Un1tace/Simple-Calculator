@@ -1223,8 +1223,8 @@
 	"kind" : "cmakeFiles",
 	"paths" : 
 	{
-		"build" : "/Users/kaiafful/Documents/Cpp Projects/Calculator/cmake-build-debug",
-		"source" : "/Users/kaiafful/Documents/Cpp Projects/Calculator"
+		"build" : "/Users/kaiafful/Documents/Cpp Projects/Simple-Calculator/Calculator/cmake-build-debug",
+		"source" : "/Users/kaiafful/Documents/Cpp Projects/Simple-Calculator/Calculator"
 	},
 	"version" : 
 	{

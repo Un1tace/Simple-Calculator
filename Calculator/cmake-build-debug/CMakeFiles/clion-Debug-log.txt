@@ -1,4 +1,4 @@
-/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/aarch64/ninja -G Ninja -S "/Users/kaiafful/Documents/Cpp Projects/Calculator" -B "/Users/kaiafful/Documents/Cpp Projects/Calculator/cmake-build-debug"
+/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/aarch64/ninja -G Ninja -S "/Users/kaiafful/Documents/Cpp Projects/Simple-Calculator/Calculator" -B "/Users/kaiafful/Documents/Cpp Projects/Simple-Calculator/Calculator/cmake-build-debug"
 -- The C compiler identification is AppleClang 17.0.0.17000013
 -- The CXX compiler identification is AppleClang 17.0.0.17000013
 -- Detecting C compiler ABI info
@@ -11,6 +11,6 @@
 -- Check for working CXX compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ - skipped
 -- Detecting CXX compile features
 -- Detecting CXX compile features - done
--- Configuring done (0.6s)
--- Generating done (0.0s)
--- Build files have been written to: /Users/kaiafful/Documents/Cpp Projects/Calculator/cmake-build-debug
+-- Configuring done (1.0s)
+-- Generating done (0.3s)
+-- Build files have been written to: /Users/kaiafful/Documents/Cpp Projects/Simple-Calculator/Calculator/cmake-build-debug
