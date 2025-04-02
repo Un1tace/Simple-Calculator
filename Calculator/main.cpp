@@ -89,6 +89,17 @@ string calculateEquation(string input) {
     return input;
 }
 
+string removeSpaces(string inputString) {
+    int index = 0;
+    while (index < inputString.length() + 1) {
+        if (inputString[index] == ' ') {
+            inputString.erase(index, 1);
+        }
+        else index++;
+    }
+    return inputString;
+}
+
 int main() {
     // Get input
 
@@ -112,6 +123,8 @@ int main() {
         cout << "Invalid input!" << endl;
         return 1;
     }
+
+    input = removeSpaces(input);
 /*
     vector<int> indexes = findIndexesOfOperatorsInString(input);
 
