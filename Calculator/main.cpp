@@ -124,38 +124,6 @@ int main() {
     }
 
     input = removeSpaces(input);
-/*
-    vector<int> indexes = findIndexesOfOperatorsInString(input);
-
-    // Splitting the numbers and what operators to use as well as using them i n calculations
-    for (int o = 0; o < strlen(operators); o++) {
-        int i = 0;
-        while (countOfOperatorsInString(operators[o], input) != 0) {
-            if (input[indexes[i]] == operators[o]) {
-                // Uses functions to get the string between two indexes: getStringBetweenIndexes()
-                string numString1 = getStringBetweenIndexes(input, i-1 < 0 ? -1 : indexes[i - 1], indexes[i]);
-                string numString2 = getStringBetweenIndexes(input, indexes[i], (i + 1) > indexes.size()-1 ? input.length() : indexes[i + 1]);
-
-                float num1 = stof(numString1);
-                float num2 = stof(numString2);
-                float ans;
-
-                // Doing calculation based on the operator
-                switch (operators[o]) {
-                    case '*': ans = num1 * num2; break;
-                    case '/': ans = num1 / num2; break;
-                    case '+': ans = num1 + num2; break;
-                    case '-': ans = num1 - num2; break;
-                    default: {
-                        //If another letter is not identified as an operator
-                        cout << "Invalid operator!" << endl;
-                        ans = 0;
-                    }
-                }
-
-                //Erase part being calculated and insert answer
-                input.erase(i-1 < 0 ? 0 : indexes[i - 1]+1, i + 1 > indexes.size()-1 ? input.length() : indexes[i + 1]-(i-1 < 0 ? 0 : indexes[i - 1]+1));
-                input.insert(i-1 < 0 ? 0 : indexes[i - 1]+1, to_string(ans));
 
                 indexes = findIndexesOfOperatorsInString(input);
                 i=0;
