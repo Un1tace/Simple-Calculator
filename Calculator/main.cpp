@@ -25,6 +25,14 @@ vector<int> findIndexesOfOperatorsInString(const string& theString) {
     return indexes;
 }
 
+int countOfOperatorsInString(char operatorChar, const string& theString) {
+int amount = 0;
+    for (int i = 0; i < strlen(theString.c_str()); i++) {
+        if (operatorChar == theString[i]) amount++;
+    }
+    return amount;
+}
+
 string getStringBetweenIndexes(const string& input, const int startIndex, const int endIndex) {
     string output;
     for (int i = startIndex + 1; i < endIndex; i++) {
@@ -32,6 +40,7 @@ string getStringBetweenIndexes(const string& input, const int startIndex, const 
     }
     //debug
     cout << "Output: " << output << endl;
+    cout << "Start index: " << startIndex << "End Index: " << endIndex << endl;
 
     return output;
 }
@@ -69,11 +78,12 @@ int main() {
 
     // Splitting the numbers and what operators to use as well as using them i n calculations
     for (int o = 0; o < strlen(operators); o++) {
-        for (int i = 0; i < indexes.size(); i++) {
+        int i = 0;
+        while (countOfOperatorsInString(operators[o], input) != 0) {
             if (input[indexes[i]] == operators[o]) {
                 // Uses functions to get the string between two indexes: getStringBetweenIndexes()
                 string numString1 = getStringBetweenIndexes(input, i-1 < 0 ? -1 : indexes[i - 1], indexes[i]);
-                string numString2 = getStringBetweenIndexes(input, indexes[i], i + 1 > indexes.size() ? input.length() : indexes[i + 1]);
+                string numString2 = getStringBetweenIndexes(input, indexes[i], (i + 1) > indexes.size()-1 ? input.length() : indexes[i + 1]);
 
                 //Debug
                 cout << numString1 << endl;
@@ -90,17 +100,32 @@ int main() {
                     case '+': ans = num1 + num2; break;
                     case '-': ans = num1 - num2; break;
                     default: {
-                        //If another letter is not identified as an ooperator
+                        //If another letter is not identified as an operator
                         cout << "Invalid operator!" << endl;
                         ans = 0;
                     }
                 }
 
-                input.erase(i < 0 ? 0 : indexes[i - 1], i + 1 > indexes.size() ? input.length() : indexes[i + 1]);
-                input.insert(i < 0 ? 0 : indexes[i - 1], to_string(ans));
+                cout << "Old input: " << input << endl;
+                //Erase part being calculated and insert answer
+                input.erase(i-1 < 0 ? 0 : indexes[i - 1]+1, i + 1 > indexes.size()-1 ? input.length() : indexes[i + 1]-(i-1 < 0 ? 0 : indexes[i - 1]+1));
+                cout << "Erased: " << (i-1 < 0 ? 0 : indexes[i - 1]) << " " <<  (i + 1 > indexes.size()-1 ? input.length()-1 : indexes[i + 1]-1) << endl;
+                input.insert(i-1 < 0 ? 0 : indexes[i - 1]+1, to_string(ans));
+                cout << "New input: " << input << endl;
                 indexes = findIndexesOfOperatorsInString(input);
+                i=0;
+
+                for (int i = 0; i < indexes.size(); i++) {
+                    cout << i << ": " << indexes[i] << endl;
+                }
+
+
+            }
+            else {
+                i++;
             }
         }
+        outOfWhile:
     }
 
 
