@@ -38,11 +38,55 @@ string getStringBetweenIndexes(const string& input, const int startIndex, const 
     for (int i = startIndex + 1; i < endIndex; i++) {
         output += input[i];
     }
-    //debug
-    cout << "Output: " << output << endl;
-    cout << "Start index: " << startIndex << "End Index: " << endIndex << endl;
 
     return output;
+}
+
+string calculateEquation(string input) {
+    vector<int> indexes = findIndexesOfOperatorsInString(input);
+
+    // Splitting the numbers and what operators to use as well as using them i n calculations
+    for (int o = 0; o < strlen(operators); o++) {
+        int i = 0;
+        while (countOfOperatorsInString(operators[o], input) != 0) {
+            if (input[indexes[i]] == operators[o]) {
+                // Uses functions to get the string between two indexes: getStringBetweenIndexes()
+                string numString1 = getStringBetweenIndexes(input, i-1 < 0 ? -1 : indexes[i - 1], indexes[i]);
+                string numString2 = getStringBetweenIndexes(input, indexes[i], (i + 1) > indexes.size()-1 ? input.length() : indexes[i + 1]);
+
+                float num1 = stof(numString1);
+                float num2 = stof(numString2);
+                float ans;
+
+                // Doing calculation based on the operator
+                switch (operators[o]) {
+                    case '*': ans = num1 * num2; break;
+                    case '/': ans = num1 / num2; break;
+                    case '+': ans = num1 + num2; break;
+                    case '-': ans = num1 - num2; break;
+                    default: {
+                        //If another letter is not identified as an operator
+                        cout << "Invalid operator!" << endl;
+                        ans = 0;
+                    }
+                }
+
+                //Erase part being calculated and insert answer
+                input.erase(i-1 < 0 ? 0 : indexes[i - 1]+1, i + 1 > indexes.size()-1 ? input.length() : indexes[i + 1]-(i-1 < 0 ? 0 : indexes[i - 1]+1));
+                input.insert(i-1 < 0 ? 0 : indexes[i - 1]+1, to_string(ans));
+
+                indexes = findIndexesOfOperatorsInString(input);
+                i=0;
+
+
+            }
+            else {
+                i++;
+            }
+        }
+        outOfWhile:
+    }
+    return input;
 }
 
 int main() {
@@ -68,13 +112,8 @@ int main() {
         cout << "Invalid input!" << endl;
         return 1;
     }
-
+/*
     vector<int> indexes = findIndexesOfOperatorsInString(input);
-
-    for (int i = 0; i < indexes.size(); i++) {
-        cout << i << ": " << indexes[i] << endl;
-    }
-
 
     // Splitting the numbers and what operators to use as well as using them i n calculations
     for (int o = 0; o < strlen(operators); o++) {
@@ -84,10 +123,6 @@ int main() {
                 // Uses functions to get the string between two indexes: getStringBetweenIndexes()
                 string numString1 = getStringBetweenIndexes(input, i-1 < 0 ? -1 : indexes[i - 1], indexes[i]);
                 string numString2 = getStringBetweenIndexes(input, indexes[i], (i + 1) > indexes.size()-1 ? input.length() : indexes[i + 1]);
-
-                //Debug
-                cout << numString1 << endl;
-                cout << numString2 << endl;
 
                 float num1 = stof(numString1);
                 float num2 = stof(numString2);
@@ -106,18 +141,12 @@ int main() {
                     }
                 }
 
-                cout << "Old input: " << input << endl;
                 //Erase part being calculated and insert answer
                 input.erase(i-1 < 0 ? 0 : indexes[i - 1]+1, i + 1 > indexes.size()-1 ? input.length() : indexes[i + 1]-(i-1 < 0 ? 0 : indexes[i - 1]+1));
-                cout << "Erased: " << (i-1 < 0 ? 0 : indexes[i - 1]) << " " <<  (i + 1 > indexes.size()-1 ? input.length()-1 : indexes[i + 1]-1) << endl;
                 input.insert(i-1 < 0 ? 0 : indexes[i - 1]+1, to_string(ans));
-                cout << "New input: " << input << endl;
+
                 indexes = findIndexesOfOperatorsInString(input);
                 i=0;
-
-                for (int i = 0; i < indexes.size(); i++) {
-                    cout << i << ": " << indexes[i] << endl;
-                }
 
 
             }
@@ -127,7 +156,8 @@ int main() {
         }
         outOfWhile:
     }
-
+*/
+    input = calculateEquation(input);
 
     cout << input << endl;
 
