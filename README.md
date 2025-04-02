@@ -6,3 +6,5 @@
 To use just enter a one line calculation without spaces using only four basic operators (*, /, +, -), calculations will be done in bidmas order and will provide you with an answer.
 
 Doesn't do brackets yet only the 4 functions.
+
+May add onto this into the future.
