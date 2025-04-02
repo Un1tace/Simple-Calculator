@@ -3,9 +3,9 @@
 
 using namespace std;
 
-char operators[4] = {'*', '/', '+', '-'};
+constexpr char operators[4] = {'*', '/', '+', '-'};
 
-
+// Simple algorithm to check if an item is in a list.
 bool listContains(auto toFind, auto list[]) {
     bool found = false;
     for (int i = 0; i < strlen(list); i++) {
@@ -16,6 +16,7 @@ bool listContains(auto toFind, auto list[]) {
     return found;
 }
 
+// Find all the indexes of the operator in the operators variable in the string
 vector<int> findIndexesOfOperatorsInString(const string& theString) {
     vector<int> indexes;
     for (int i = 0; i < strlen(theString.c_str()); i++) {
@@ -29,6 +30,9 @@ string getStringBetweenIndexes(const string& input, const int startIndex, const 
     for (int i = startIndex + 1; i < endIndex; i++) {
         output += input[i];
     }
+    //debug
+    cout << "Output: " << output << endl;
+
     return output;
 }
 
@@ -36,8 +40,10 @@ int main() {
     // Get input
 
     cout << "(*,/,+,-)" << endl <<"Enter the calculation you want to perform: " << endl;
+    //cin >> input;
     string input;
-    cin >> input;
+    // Use this function to get the entire line of the input... :3
+    getline(cin, input);
 
     // Check all characters are valid characters
     bool validInput = true;
@@ -54,47 +60,45 @@ int main() {
         return 1;
     }
 
-    /*respace:
-    for (int i = 0; i < input.length(); i++) {
-        if (listContains(input[i], operators) && !(input[i-1] == ' ' && input[i+1] == ' ')) {
-            if (input[i - 1] != ' ') input.insert(i, " ");
-            if (input[i + 1] != ' ') input.insert(i + 1, " ");
-            goto respace;
-        }
-    }*/
-
     vector<int> indexes = findIndexesOfOperatorsInString(input);
 
     for (int i = 0; i < indexes.size(); i++) {
-        cout << indexes[i] << endl;
+        cout << i << ": " << indexes[i] << endl;
     }
 
+
+    // Splitting the numbers and what operators to use as well as using them i n calculations
     for (int o = 0; o < strlen(operators); o++) {
         for (int i = 0; i < indexes.size(); i++) {
             if (input[indexes[i]] == operators[o]) {
-                cout << o << ',' << i << endl;
-                string numString1 = getStringBetweenIndexes(input, i < 0 ? 0 : indexes[i - 1], indexes[i]);
-                string numString2 = getStringBetweenIndexes(input, indexes[i], i > indexes.size() ? input.length() : indexes[i + 1]);
-cout << numString1 << endl;
+                // Uses functions to get the string between two indexes: getStringBetweenIndexes()
+                string numString1 = getStringBetweenIndexes(input, i-1 < 0 ? -1 : indexes[i - 1], indexes[i]);
+                string numString2 = getStringBetweenIndexes(input, indexes[i], i + 1 > indexes.size() ? input.length() : indexes[i + 1]);
+
+                //Debug
+                cout << numString1 << endl;
                 cout << numString2 << endl;
 
                 float num1 = stof(numString1);
                 float num2 = stof(numString2);
                 float ans;
 
+                // Doing calculation based on the operator
                 switch (operators[o]) {
-                    case '*': ans = num1 * num2;
-                    case '/': ans = num1 / num2;
-                    case '+': ans = num1 + num2;
-                    case '-': ans = num1 - num2;
+                    case '*': ans = num1 * num2; break;
+                    case '/': ans = num1 / num2; break;
+                    case '+': ans = num1 + num2; break;
+                    case '-': ans = num1 - num2; break;
                     default: {
+                        //If another letter is not identified as an ooperator
                         cout << "Invalid operator!" << endl;
                         ans = 0;
                     }
                 }
 
-                input.erase(i < 0 ? 0 : indexes[i - 1], i > indexes.size() ? input.length() : indexes[i + 1]);
+                input.erase(i < 0 ? 0 : indexes[i - 1], i + 1 > indexes.size() ? input.length() : indexes[i + 1]);
                 input.insert(i < 0 ? 0 : indexes[i - 1], to_string(ans));
+                indexes = findIndexesOfOperatorsInString(input);
             }
         }
     }
